@@ -155,7 +155,7 @@ qrencode -t ansiutf8 -l L < $HOME/$CLIENT_NAME-wg0.conf
         iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
         iptables -A FORWARD -m conntrack --ctstate NEW -s $PRIVATE_SUBNET -m policy --pol none --dir in -j ACCEPT
         iptables -t nat -A POSTROUTING -s $PRIVATE_SUBNET -m policy --pol none --dir out -j MASQUERADE
-        iptables -A INPUT -p udp --dport $SERVER_PORT -j ACCEPT
+        iptables -I INPUT 1 -p udp --dport $SERVER_PORT -j ACCEPT
         iptables-save > /etc/iptables/rules.v4
     fi
 
